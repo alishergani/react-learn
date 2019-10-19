@@ -1,14 +1,17 @@
 const app = require('express')();
+const routes = require('./routes')
 const cors = require('cors')
 const http = require('http').Server(app)
 const io = require('socket.io')
 const socket = io(http);
+const Fishes = require("./models/FishSchema");
+const connect = require("./db");
+
 let port = 3333;
 
 app.use(cors())
+app.use('/', routes)
 
-const Fishes = require("./models/FishSchema");
-const connect = require("./db");
 
 
 socket.on('connection', async (socket) => {

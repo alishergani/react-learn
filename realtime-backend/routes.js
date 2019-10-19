@@ -1,25 +1,18 @@
 const express = require('express');
-const mongoose = require('mongoose');
 const router = express.Router();
-const Schema = mongoose.Schema;
+const uuid = require('uuid')
 
-const fishesScheme = new Schema({
-    name: String,
-    image: String,
-    desc: String,
-    price: Number,
-    status: String
-});
-const Fishes = mongoose.model("Fishes", fishesScheme);
-
+const Fishes = require("./models/FishSchema");
+const connect = require("./db");
 router.get('/fishlist', async (req, res) => {
     let fishes = await Fishes.find({})
     res.json(fishes)
 })
 
 
-router.post('/addFish', (req, res) => {
-    console.log(req);
+router.post('/auth', (req, res) => {
+        console.log(req.body)
+        res.json(req.body)
   
 
         // const Fishes = mongoose.model("Fishes", fishesScheme);
@@ -39,7 +32,6 @@ router.post('/addFish', (req, res) => {
         //     if(err) return console.log(err);
         //     console.log("Сохранен объект", fish);
         // });
-        res.send("Redirect")
     }
 );
 
